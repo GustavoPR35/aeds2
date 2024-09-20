@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuários</title>
+</head>
+
+<!-- http://localhost:4919 -->
+
+<script>
+    function buscarUsuario() {
+        const codigo = document.getElementById('codigo-show').value;
+        window.location.href = `http://localhost:4919/usuario/${codigo}`;
+        return false; // Para prevenir o envio do formulário
+    }
+</script>
+
+<body>
+    <h1>Cadastrar Usuário</h1>
+    <form action="http://localhost:4919/usuario" method="post">
+        <label for="codigo">Código:</label>
+        <input type="text" id="codigo" name="codigo" required><br>
+        <label for="login">Login:</label>
+        <input type="text" id="login" name="login" required><br>
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required><br>
+        <label for="sexo">Sexo:</label>
+        <input type="text" id="sexo" name="sexo" required><br>
+        <input type="submit" value="Cadastrar">
+    </form>
+
+	<h2>Atualizar Usuário</h2>
+	<form action="http://localhost:4919/usuario/update" method="get">
+	    <label for="codigo-update">Código:</label>
+	    <input type="text" id="codigo-update" name="codigo" required><br>
+	    <label for="login-update">Novo Login:</label>
+	    <input type="text" id="login-update" name="login"><br>
+	    <label for="senha-update">Nova Senha:</label>
+	    <input type="password" id="senha-update" name="senha"><br>
+	    <label for="sexo-update">Novo Sexo:</label>
+	    <input type="text" id="sexo-update" name="sexo"><br>
+	    <input type="submit" value="Atualizar" onclick="this.form.action = `http://localhost:4919/usuario/update/${document.getElementById('codigo-update').value}`;">
+	</form>
+	
+	<!--
+    <h2>Buscar Usuário</h2>
+    <form action="http://localhost:4919/usuario" method="get">
+        <label for="codigo-show">Código:</label>
+        <input type="text" id="codigo-show" name="codigo" required><br>
+        <input type="submit" value="Mostrar Usuário">
+    </form>
+	-->
+	
+	<h2>Buscar Usuário</h2>
+	<form id="form-buscar-usuario" method="get" onsubmit="return buscarUsuario();">
+	    <label for="codigo-show">Código:</label>
+	    <input type="text" id="codigo-show" name="codigo" required><br>
+	    <input type="submit" value="Mostrar Usuário">
+	</form>
+	
+	<h2>Excluir Usuário</h2>
+	<form action="http://localhost:4919/usuario/delete" method="get">
+	    <label for="codigo-delete">Código:</label>
+	    <input type="text" id="codigo-delete" name="codigo" required><br>
+	    <input type="submit" value="Excluir" onclick="this.form.action = `http://localhost:4919/usuario/delete/${document.getElementById('codigo-delete').value}`;">
+	</form>
+
+    <form action="http://localhost:4919/usuario" method="get" id="form-all">
+        <input type="submit" value="Mostrar Todos os Usuários">
+    </form>
+</body>
+</html>
